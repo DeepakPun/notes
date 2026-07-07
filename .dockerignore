@@ -1,0 +1,13 @@
+# Exclude local dependencies
+node_modules/
+npm-debug.log
+
+# Exclude source control files
+.git
+.gitignore
+
+# Exclude configuration secrets
+.env
+
+# Exclude documentation
+README.md
