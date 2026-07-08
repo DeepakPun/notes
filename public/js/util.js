@@ -55,3 +55,13 @@
     })
   })
 })()
+
+// Find all Bootstrap alerts on the page
+const alerts = document.querySelectorAll(".alert")
+alerts.forEach(function (alert) {
+  // Automatically close the alert overlay after 4 seconds (4000ms)
+  setTimeout(function () {
+    const bsAlert = new bootstrap.Alert(alert)
+    bsAlert.close()
+  }, 6000)
+})

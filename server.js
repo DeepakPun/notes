@@ -8,11 +8,13 @@ import connectDB from "./config/db.js"
 import noteRoutes from "./routes/noteRoutes.js"
 import pageRoutes from "./routes/pageRoutes.js"
 import MongoStore from "connect-mongo"
+import methodOverride from "method-override"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const app = express()
+app.use(methodOverride("_method"))
 const PORT = process.env.PORT || 3000
 
 // Connect to MongoDB
