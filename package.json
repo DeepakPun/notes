@@ -1,0 +1,29 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "A professional note taking application built using node, express, ejs, mongo and bootstrap on the monolithic architecture and docker",
+  "keywords": [
+    "node",
+    "express",
+    "ejs",
+    "mongodb"
+  ],
+  "license": "ISC",
+  "author": "Deepak Pun",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npx dotenvx run -f .env.local -- node --watch server",
+    "start": "node server",
+    "test": "npm test"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^2.1.5",
+    "connect-flash": "^0.1.1",
+    "ejs": "^6.0.1",
+    "ejs-mate": "^4.0.0",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.7.4"
+  }
+}

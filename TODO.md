@@ -84,3 +84,10 @@ Harden the codebase against performance drops, security gaps, and unexpected fai
 - [ ] **Unified Error & Crash Strategy**
   - [ ] Write custom, user-friendly 404/500 template fallback errors inside EJS.
   - [ ] Configure structured server logging (`winston` or `pino`) to easily monitor remote production logs.
+
+---
+
+## 🚀 Vercel Production Deployment Reminders
+
+- **Environment Variables**: Do NOT push `.env.keys` to production. Instead, copy your plaintext keys (like `DB_URL`) and paste them directly into the **Vercel Dashboard > Project Settings > Environment Variables** UI.
+- **Database Target**: Because Vercel is in the cloud, your local `mongodb://localhost:27017` will not work in production. You will need to spin up a free cloud database cluster on **MongoDB Atlas** and use their cloud connection string for the production environment variable.

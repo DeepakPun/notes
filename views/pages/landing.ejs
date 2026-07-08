@@ -1,0 +1,63 @@
+<%- layout('boilerplate') %>
+
+<!-- Full-Screen Layout Wrapper -->
+<div
+  class="d-flex flex-column justify-content-center align-items-center flex-grow-1 text-white py-5 px-3"
+  style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"
+>
+  <div class="container text-center">
+    <!-- Live Node Status Indicator -->
+    <div
+      class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-info bg-opacity-10 text-info font-monospace small mb-4 border border-info border-opacity-25"
+    >
+      <span
+        class="d-inline-block rounded-circle bg-info animate-pulse"
+        style="width: 6px; height: 6px"
+      ></span>
+      CORE_ENGINE_STABLE // v1.0.0
+    </div>
+
+    <!-- Main Core Headers -->
+    <h1 class="display-2 fw-black tracking-tight text-white mb-3">
+      Notes Matrix
+    </h1>
+
+    <p
+      class="lead text-secondary font-monospace small mx-auto mb-0"
+      style="max-width: 500px; line-height: 1.7"
+    >
+      An isolated, production-grade memory bank with granular authorization
+      layers. System is online and ready for configuration.
+    </p>
+    <div class="d-flex justify-content-center">
+      <a
+        href="/notes"
+        class="btn btn-info font-monospace px-4 py-3 mt-5 shadow-sm fw-bold text-dark"
+      >
+        LAUNCH_WORKSPACE &rarr;
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Inline Minimal System Styles -->
+<style>
+  .fw-black {
+    font-weight: 900 !important;
+  }
+  .tracking-tight {
+    letter-spacing: -0.035em !important;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>
