@@ -18,7 +18,7 @@ app.use(methodOverride("_method"))
 const PORT = process.env.PORT || 3000
 
 // Connect to MongoDB
-connectDB()
+await connectDB()
 
 app.engine("ejs", engine)
 app.set("view engine", "ejs")

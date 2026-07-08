@@ -19,6 +19,8 @@ const connectDB = async () => {
       `🔗 [CACHE INSTANCE] Connected Host: ${conn.host} | DB Name: ${conn.name}`,
     )
     return
+  } else {
+    connectionState.isConnected = false
   }
 
   try {
@@ -28,7 +30,11 @@ const connectDB = async () => {
     }
 
     // Attempt the initial connection handshake
-    const dbConnection = await mongoose.connect(dbUri)
+    const dbConnection = await mongoose.connect(dbUri, {
+      maxPoolSize: 1,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    })
 
     // Update state based on Mongoose readiness states (1 = Connected)
     connectionState.isConnected = dbConnection.connections[0].readyState === 1
