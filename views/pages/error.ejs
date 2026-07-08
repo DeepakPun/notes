@@ -1,0 +1,93 @@
+<%- layout('boilerplate') %>
+
+<!-- Error Terminal Canvas Wrapper -->
+<div
+  class="d-flex flex-column flex-grow-1 w-100 py-5 justify-content-center align-items-center"
+  style="background-color: #0f172a"
+>
+  <div
+    class="card p-5 border border-danger border-opacity-20 text-white font-monospace shadow-lg"
+    style="background-color: #1e293b; width: 100%; max-width: 680px"
+  >
+    <!-- Code Terminal Header Row -->
+    <div
+      class="d-flex align-items-center justify-content-between border-b pb-3 mb-4 border-secondary border-opacity-20"
+      style="border-bottom: 1px solid #334155"
+    >
+      <div class="d-flex align-items-center gap-2">
+        <span
+          class="rounded-circle bg-danger d-inline-block animate-pulse-fast"
+          style="width: 10px; height: 10px"
+        ></span>
+        <span class="text-danger fw-bold small ms-1" style="font-size: 0.85rem"
+          >// KERNEL_PANIC_EXCEPTION_LOG</span
+        >
+      </div>
+      <span class="text-muted small" style="font-size: 0.75rem"
+        >STATUS_CODE: <%= statusCode %></span
+      >
+    </div>
+
+    <!-- Major Error Message Summary Display Block -->
+    <div
+      class="p-3 mb-4 bg-black bg-opacity-30 rounded border border-secondary border-opacity-10 text-danger-emphasis"
+      style="background-color: #0b1329 !important"
+    >
+      <p
+        class="mb-0 fw-bold tracking-tight"
+        style="line-height: 1.6; color: #f87171 !important"
+      >
+        <%= message %>
+      </p>
+    </div>
+
+    <!-- Architectural Troubleshooting Parameters Context -->
+    <p
+      class="text-secondary small mb-5"
+      style="line-height: 1.7; color: #94a3b8 !important"
+    >
+      The application transport layer failed to process your payload execution
+      instruction safely. System parameters have been isolated to protect ledger
+      stability.
+    </p>
+
+    <!-- Dynamic Context Return Action Buttons -->
+    <div
+      class="d-flex align-items-center justify-content-between pt-3 border-top border-secondary border-opacity-10"
+    >
+      <span class="text-muted small" style="font-size: 0.7rem"
+        >// NOTES_MATRIX // V1.0.0</span
+      >
+      <div class="d-flex gap-3">
+        <button
+          onclick="window.history.back()"
+          class="btn btn-outline-secondary font-monospace px-3 py-1.5 small text-secondary"
+        >
+          &larr; BACK_ONE_NODE
+        </button>
+        <a
+          href="/notes"
+          class="btn btn-info font-monospace px-4 py-1.5 small shadow-sm fw-bold text-dark text-decoration-none"
+        >
+          TERMINAL_HOME
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Extra Inline System Overrides -->
+<style>
+  @keyframes pulse-fast {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.2;
+    }
+  }
+  .animate-pulse-fast {
+    animation: pulse-fast 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>

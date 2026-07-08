@@ -1,20 +1,41 @@
 <footer
-  class="footer mt-auto py-3 border-top border-secondary border-opacity-20"
-  style="background-color: #0f172a"
+  class="footer mt-auto py-4 border-top border-secondary border-opacity-20"
 >
-  <div class="container text-center">
-    <p
-      class="mb-1 text-muted font-monospace small"
-      style="color: #64748b !important"
-    >
-      &copy; <%= new Date().getFullYear() %> Notes Matrix Engine. All rights
-      reserved.
+  <div class="container text-center font-monospace small text-slate-400">
+    <!-- System Metadata Analytics Row -->
+    <p class="mb-2 text-uppercase tracking-wider opacity-60">
+      &copy; <%= new Date().getFullYear() %> Notes Matrix Engine // Built by
+      Operator: Deepak
     </p>
-    <span
-      class="text-muted font-monospace small"
-      style="color: #64748b !important"
+
+    <!-- Interactive Navigation Context Bridges -->
+    <div
+      class="d-flex justify-content-center gap-3 mb-2 font-monospace"
+      style="font-size: 0.8rem"
     >
-      // NOTES_MATRIX // CORE ENGINE INSTANCE SECURED
+      <a href="/notes" class="text-secondary text-decoration-none hover-info"
+        >// WORKSPACE</a
+      >
+      <span class="text-secondary-opacity opacity-25">|</span>
+      <!-- Swap this URL path out for your actual repository location down the road -->
+      <a
+        href="https://github.com/DeepakPun/notes"
+        target="_blank"
+        class="text-secondary text-decoration-none hover-info"
+        >// SOURCE_CODE</a
+      >
+    </div>
+
+    <!-- Live Hardened Cluster Status Indicator -->
+    <span
+      class="text-info opacity-70 d-inline-flex align-items-center gap-1.5"
+      style="font-size: 0.75rem"
+    >
+      <span
+        class="d-inline-block rounded-circle bg-success"
+        style="width: 5px; height: 5px"
+      ></span>
+      CORE ENGINE INSTANCE SECURED // TENANT_ISOLATION_ACTIVE
     </span>
   </div>
 </footer>

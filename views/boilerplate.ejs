@@ -10,10 +10,21 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/css/custom.css" />
     <style>
+      /* Force the absolute canvas baseline to stay slate dark */
+      html,
       body {
-        background-color: #0f172a; /* Slate 900 */
-        color: #cbd5e1; /* Slate 300 */
+        background-color: #0f172a !important; /* Slate 900 */
+        color: #cbd5e1 !important; /* Slate 300 */
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      /* Lock down background continuity across layout boundaries */
+      .navbar,
+      main,
+      footer {
+        background-color: inherit;
       }
       .note-card {
         transition:
@@ -30,7 +41,7 @@
   <body class="d-flex flex-column min-vh-100">
     <%- include('./partials/navbar') %> <%- include('./partials/flash') %>
 
-    <main class="d-flex flex-column flex-grow-1"><%- body %></main>
+    <main class="d-flex flex-column flex-grow-1 w-100"><%- body %></main>
 
     <%- include('./partials/footer') %>
 
@@ -45,5 +56,6 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
+    <script src="/js/util.js"></script>
   </body>
 </html>

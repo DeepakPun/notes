@@ -1,0 +1,78 @@
+<%- layout('boilerplate') %>
+
+<!-- Full-Screen Matrix Content Container -->
+<div class="d-flex flex-column flex-grow-1 w-100 py-5" style="background-color: #0f172a;">
+    <div class="container text-white" style="max-width: 800px;">
+        
+        <!-- Navigation Breadcrumb Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4 font-monospace small">
+            <div>
+                <a href="/notes" class="text-info text-decoration-none">&larr; RETURN_TO_LEDGER</a>
+                <span class="text-muted ms-2">// NODE_INSPECTION_BUFFER</span>
+            </div>
+            
+            <!-- Structural Action Form Triggers --> 
+<% if (currentUser && note.author && currentUser.id === note.author.toString()) { %>
+    <div class="d-flex gap-2">
+        <!-- Edit Form Action Trigger Link -->
+        <a href="/notes/<%= note._id %>/edit" class="btn btn-outline-info btn-sm font-monospace py-1 px-2.5 text-decoration-none" style="font-size: 0.75rem;">
+            EDIT_NODE
+        </a>
+        
+        <!-- Delete Form Link -->
+        <form action="/notes/<%= note._id %>/delete" method="POST" onsubmit="return confirm('[WARNING] Execute binary delete protocol on this node instance?');">
+            <button type="submit" class="btn btn-outline-danger btn-sm font-monospace py-1 px-2.5" style="font-size: 0.75rem;">
+                PURGE_NODE
+            </button>
+        </form>
+    </div>
+<% } %>
+
+        </div>
+
+        <!-- Master Document Header Section -->
+        <div class="pb-3 mb-4 border-bottom border-secondary border-opacity-20">
+            <div class="d-flex align-items-center gap-3 mb-2">
+                <span class="badge font-monospace text-info px-2 py-1 small border border-info border-opacity-25" style="background-color: rgba(56, 189, 248, 0.05); font-size: 0.75rem;">
+                    <%= note.folderName %>
+                </span>
+                <% if (note.isPinned) { %>
+                    <span class="text-warning font-monospace" style="font-size: 0.75rem;">⚡ PIN_LOCKED</span>
+                <% } %>
+            </div>
+            
+            <h1 class="display-5 fw-black text-white tracking-tight mb-2">
+                <%= note.title %>
+            </h1>
+            
+            <div class="font-monospace text-muted" style="font-size: 0.75rem; color: #64748b !important;">
+                ALLOCATED_TIMESTAMP: <%= new Date(note.createdAt).toLocaleString() %>
+            </div>
+        </div>
+
+        <!-- Raw Core Text Content Body -->
+        <div class="fs-6 mb-5 text-secondary-emphasis" style="line-height: 1.8; color: #cbd5e1 !important; white-space: pre-wrap;">
+            <%= note.content %>
+        </div>
+
+        <!-- Taxonomy Bottom Footer Section -->
+        <% if (note.tags && note.tags.length > 0) { %>
+                                    <div class="d-flex flex-wrap gap-1.5 mb-4">
+                                        <% note.tags.forEach(tag => { %>
+                                            <span class="font-monospace me-2 small px-2 py-0.5 rounded text-secondary border border-secondary border-opacity-20" style="font-size: 0.75rem; background-color: rgba(148, 163, 184, 0.05);">
+                                                #<%= tag %>
+                                            </span>
+                                        <% }) %>
+                                    </div>
+                                <% } %>
+
+    </div>
+</div>
+
+<!-- Inline Hover Effect Rule -->
+<style>
+    .hover-info:hover {
+        color: #38bdf8 !important;
+        text-decoration: underline !important;
+    }
+</style>

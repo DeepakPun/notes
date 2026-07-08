@@ -1,0 +1,136 @@
+<%- layout('boilerplate') %>
+
+<!-- Form Engine Matrix Canvas Wrapper -->
+<div
+  class="d-flex flex-column flex-grow-1 w-100 py-2"
+  style="background-color: #0f172a"
+>
+  <div class="container text-white" style="max-width: 720px">
+    <!-- Navigation Breadcrumb Header -->
+    <div class="mb-4 font-monospace small">
+      <a href="/notes" class="text-info text-decoration-none"
+        >&larr; RETURN_TO_LEDGER</a
+      >
+      <span class="text-muted ms-2">// NODE_INITIALIZATION_STREAM</span>
+    </div>
+
+    <!-- Section Title Header Block -->
+    <div class="pb-3 mb-4 border-bottom border-secondary border-opacity-20">
+      <h1 class="h2 fw-black text-white tracking-tight mb-1">
+        Initialize Note Node
+      </h1>
+      <p class="text-info font-monospace small mb-0">
+        // System allocation parameter matrix
+      </p>
+    </div>
+
+    <!-- Data Entry Form Block -->
+    <form action="/notes" method="POST" class="needs-validation" novalidate>
+      <!-- 1. Document Title Field -->
+      <div class="mb-3">
+        <label
+          for="title"
+          class="form-label font-monospace text-secondary small fw-bold"
+          >1. NODE_TITLE_IDENTIFIER</label
+        >
+        <input
+          type="text"
+          class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace"
+          id="title"
+          name="title"
+          placeholder="e.g., Docker Production Clusters Setup"
+          required
+          style="background-color: #0b1329 !important"
+        />
+        <div class="invalid-feedback font-monospace small text-danger mt-1">
+          [CRITICAL] String element identity token is mandatory.
+        </div>
+      </div>
+
+      <!-- 2. Folder Allocation Taxonomy Selection -->
+      <div class="mb-3">
+        <label
+          for="folderName"
+          class="form-label font-monospace text-secondary small fw-bold"
+          >2. LOGICAL_DIRECTORY_TARGET</label
+        >
+        <select
+          class="form-select bg-dark border-secondary border-opacity-30 text-white font-monospace"
+          id="folderName"
+          name="folderName"
+          style="background-color: #0b1329 !important"
+        >
+          <option value="Root_Directory" selected>
+            Root_Directory (Default)
+          </option>
+          <option value="Infrastructure">Infrastructure</option>
+          <option value="Database_Core">Database_Core</option>
+          <option value="Security_Audit">Security_Audit</option>
+          <option value="Frontend_Templates">Frontend_Templates</option>
+        </select>
+      </div>
+
+      <!-- 3. Tags Context Arrays String -->
+      <div class="mb-4">
+        <label
+          for="tags"
+          class="form-label font-monospace text-secondary small fw-bold"
+          >3. TAXONOMY_METRIC_TAGS (COMMA_SEPARATED)</label
+        >
+        <input
+          type="text"
+          class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace"
+          id="tags"
+          name="tags"
+          placeholder="e.g., devops, cloud, scaling"
+          style="background-color: #0b1329 !important"
+        />
+        <div
+          class="form-text font-monospace text-info text-opacity-50"
+          style="font-size: 0.75rem"
+        >
+          // Separating keywords with commas parses them into indexable array
+          values natively.
+        </div>
+      </div>
+
+      <!-- 4. Text Area Editor Layer Context Content -->
+      <div class="mb-5">
+        <label
+          for="content"
+          class="form-label font-monospace text-secondary small fw-bold"
+          >4. RAW_MEMORY_BUFFER_CONTEXT (CONTENT)</label
+        >
+        <textarea
+          class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace"
+          id="content"
+          name="content"
+          rows="8"
+          placeholder="Initialize memory stream parameters text data here..."
+          required
+          style="background-color: #0b1329 !important; line-height: 1.6"
+        ></textarea>
+        <div class="invalid-feedback font-monospace small text-danger mt-1">
+          [CRITICAL] Memory data context payload stream cannot be submitted
+          empty.
+        </div>
+      </div>
+
+      <!-- 5. Form Executive Execution Processing Control Triggers -->
+      <div class="d-flex align-items-center justify-content-end gap-3">
+        <a
+          href="/notes"
+          class="btn btn-outline-secondary font-monospace px-4 py-2 small"
+        >
+          ABORT_STREAM
+        </a>
+        <button
+          type="submit"
+          class="btn btn-info font-monospace px-4 py-2 small shadow-sm fw-bold text-dark"
+        >
+          COMMIT_DATA_NODE &rarr;
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

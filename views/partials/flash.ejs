@@ -1,1 +1,19 @@
-<!-- <h1>Flash Messages</h1> -->
+<div class="container mt-4 mb-0 font-monospace small">
+    <!-- Success Feedback Pipeline Alert -->
+    <% if (success && success.length > 0) { %>
+        <div class="alert alert-success bg-opacity-10 text-info border-info border-opacity-30 alert-dismissible fade show shadow-sm" 
+             style="background-color: rgba(56, 189, 248, 0.05); color: #38bdf8 !important;" role="alert">
+            <span class="fw-bold">[SUCCESS]</span> <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="filter: invert(1) grayscale(1) brightness(2); opacity: 0.8;"></button>
+        </div>
+    <% } %>
+
+    <!-- Error/Failure Validation Overrides Alert -->
+    <% if (error && error.length > 0) { %>
+        <div class="alert alert-danger bg-opacity-10 text-danger border-danger border-opacity-30 alert-dismissible fade show shadow-sm" 
+             style="background-color: rgba(239, 68, 68, 0.05); color: #f87171 !important;" role="alert">
+            <span class="fw-bold">[CRITICAL_ERROR]</span> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="filter: invert(1) grayscale(1) brightness(2); opacity: 0.8;"></button>
+        </div>
+    <% } %>
+</div>

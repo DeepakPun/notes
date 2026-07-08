@@ -1,0 +1,41 @@
+/**
+ * Notes Matrix Custom UI Styling Fixes
+ */
+
+/* 1. Global Contrast Alignment Overrides for Form Placeholders */
+.form-control::placeholder,
+.form-select::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important; /* Forces full browser rendering opacity visibility */
+}
+
+/* Support legacy browser webkit specifications */
+.form-control::-webkit-input-placeholder {
+  color: #64748b !important;
+}
+.form-control::-moz-placeholder {
+  color: #64748b !important;
+}
+.form-control:-ms-input-placeholder {
+  color: #64748b !important;
+}
+
+/* 2. Enhanced Read-Only Typography Link Interaction Hover Animations */
+.hover-info:hover {
+  color: #38bdf8 !important;
+  text-decoration: underline !important;
+}
+
+.hover-underline:hover {
+  color: #38bdf8 !important;
+  text-decoration: underline !important;
+}
+
+/* Footer text tracking alignments */
+.text-slate-400 {
+  color: #64748b !important;
+}
+
+.text-secondary-opacity {
+  color: #334155;
+}

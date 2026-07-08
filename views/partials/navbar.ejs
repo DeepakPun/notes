@@ -1,9 +1,76 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
+<nav class="navbar navbar-expand-lg border-bottom border-secondary border-opacity-20" style="background-color: #0b1329;">
+  <div class="container">
+    
+    <!-- Application Brand Logo Link -->
+    <a class="navbar-brand font-monospace fw-black tracking-tight text-white d-flex align-items-center gap-2" href="/">
+      <span class="d-inline-block bg-info rounded" style="width: 10px; height: 10px;"></span>
+      📝 NOTES_MATRIX
+    </a>
+
+    <!-- Mobile Responsive Collapse Trigger Button -->
+    <button class="navbar-toggler border-secondary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#matrixNav" aria-controls="matrixNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+    </button>
+
+    <!-- Navigation Control Link Matrices -->
+    <div class="collapse navbar-collapse" id="matrixNav">
+      <ul class="navbar-nav ms-auto font-monospace small align-items-center gap-2 mb-0">
+        
+        <!-- Base ledger list view link (Always open to public traffic) -->
+        <li class="nav-item">
+          <a class="nav-link text-secondary hover-info px-3" href="/notes">// VIEW_LEDGER</a>
+        </li>
+
+        <% if (currentUser && currentUser.username) { %>
+          <!-- SESSION ACTIVE: Show operator handle and a logout button -->
+          <li class="nav-item">
+            <span class="nav-link text-white px-3 border border-info border-opacity-10 bg-info bg-opacity-5 rounded">
+              OP: <%= currentUser.username %>
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-danger hover-danger px-3 text-decoration-none" href="/logout">[TERMINATE_SESSION]</a>
+          </li>
+        <% } else { %>
+          <!-- NO ACTIVE SESSION: Show standard login and account compilation anchors -->
+          <li class="nav-item">
+            <a class="nav-link text-secondary hover-info px-3 text-decoration-none" href="/login">ACCESS_TERMINAL</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-info font-monospace btn-sm px-3 ms-2 text-info" href="/register">
+              INITIALIZE_ACCOUNT &rarr;
+            </a>
+          </li>
+        <% } %>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Inline System Navbar Contrast Patches -->
+<style>
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+  .hover-info:hover { 
+    color: #38bdf8 !important; 
+  }
+  .hover-danger:hover { 
+    color: #ef4444 !important; 
+  }
+  .navbar-toggler:focus { 
+    box-shadow: none !important; 
+  }
+</style>
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-3">
   <div class="container">
     <a class="navbar-brand fw-bold font-monospace text-info" href="/"
       >📝 NOTES_MATRIX</a
-    >
-    <button
+    > -->
+<!-- <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
@@ -14,8 +81,8 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav align-items-center gap-2">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav"> -->
+<!-- <ul class="navbar-nav align-items-center gap-2">
         <li class="nav-item">
           <span class="nav-link text-light-50 font-monospace small"
             >Secure Terminal: Agent_Alpha</span
@@ -26,7 +93,7 @@
             >TERMINATE_SESSION</a
           >
         </li>
-      </ul>
-    </div>
+      </ul> -->
+<!-- </div>
   </div>
-</nav>
+</nav> -->
