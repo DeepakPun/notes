@@ -22,7 +22,7 @@
 
 /* 2. Enhanced Read-Only Typography Link Interaction Hover Animations */
 .hover-info:hover {
-  color: #38bdf8 !important;
+  color: #5fc8f6 !important;
   text-decoration: underline !important;
 }
 
@@ -31,11 +31,63 @@
   text-decoration: underline !important;
 }
 
-/* Footer text tracking alignments */
+.hover-danger:hover {
+  color: #ef4444 !important;
+}
+
+/* 3. Footer text tracking alignments */
 .text-slate-400 {
   color: #64748b !important;
 }
 
 .text-secondary-opacity {
   color: #334155;
+}
+
+/* 4. Navbar Structural & Interactive Control Elements */
+.navbar-brand {
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}
+
+/* 🛠️ INITIALIZE_ACCOUNT Link Text Visibility Hover Fix */
+.btn-matrix-init:hover {
+  color: #0b1329 !important; /* Inverts text to match dark navbar background on hover */
+  background-color: #5fc8f6 !important; /* Matches your preferred light-blue highlight metric */
+  border-color: #5fc8f6 !important;
+}
+
+.fw-black {
+  font-weight: 900 !important;
+}
+.tracking-tight {
+  letter-spacing: -0.035em !important;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-fast {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+.animate-pulse-fast {
+  animation: pulse-fast 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

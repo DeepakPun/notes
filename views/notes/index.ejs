@@ -1,85 +1,163 @@
 <%- layout('boilerplate') %>
 
-<!-- Full-Screen Matrix Content Container -->
-<div class="d-flex flex-column flex-grow-1 w-100 py-5" style="background-color: #0f172a;">
-    <div class="container text-white">
-        
-        <!-- Workspace System Dashboard Header -->
-        <div class="d-flex flex-wrap justify-content-between align-items-center pb-4 mb-5 border-bottom border-secondary border-opacity-20">
-            <div>
-                <h1 class="h2 fw-black text-white tracking-tight mb-1">Knowledge Ledger</h1>
-                <p class="text-info font-monospace small mb-0">// Active Cluster Workspace</p>
-            </div>
-            <% if (currentUser) { %>
-                <div>
-                    <!-- New Note Link -->
-                    <a href="/notes/new" class="btn btn-info font-monospace px-4 py-2 small shadow-sm fw-bold text-dark text-decoration-none">
-                        + NEW_NOTE_NODE
-                    </a>
-                </div>
-                <% } %>
+<!-- Full-Screen Matrix Content Container (Scrollbar hidden via view clipping) -->
+<div class="w-100 py-2" style="background-color: #0f172a; overflow-y: hidden;">
+  <div class="container text-white">
+    
+    <!-- Workspace System Dashboard Header Layout Boundary -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center pb-1 mb-1">
+      <div>
+        <h1 class="h2 fw-black text-white tracking-tight mb-1">Knowledge Ledger</h1>
+        <p class="text-info font-monospace small mb-0">// Active Cluster Workspace</p>
+      </div>
+      <% if (currentUser) { %>
+        <div>
+          <!-- New Note Link -->
+          <a href="/notes/new" class="btn btn-info font-monospace px-4 py-2 small shadow-sm fw-bold text-dark text-decoration-none">
+            + NEW_NOTE_NODE
+          </a>
         </div>
-
-        <!-- Active Grid Matrix Frame -->
-        <div class="row g-4">
-            <% if (notes && notes.length > 0) { %>
-                <% notes.forEach(note => { %>
-                    <div class="col-md-6 col-lg-4">
-                        <!-- Dark Slate Note Card Block -->
-                        <div class="card h-100 note-card border-0" style="background-color: #1e293b;">
-                            <div class="card-body d-flex flex-column p-4">
-                                
-                                <!-- Card Meta Header Block -->
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <span class="badge font-monospace text-info px-2.5 py-1.5 small border border-info border-opacity-25" style="background-color: rgba(56, 189, 248, 0.05);">
-                                        <%= note.folderName || 'Root_Directory' %>
-                                    </span>
-                                    <% if (note.isPinned) { %>
-                                        <span class="text-warning font-monospace small" title="Pinned Node" style="font-size: 0.8rem;">
-                                            ⚡ PIN_LOCKED
-                                        </span>
-                                    <% } %>
-                                </div>
-
-                                <!-- Content Display Elements -->
-                                <h3 class="h5 fw-bold text-white tracking-tight mb-2">
-                                    <a href="/notes/<%= note._id %>" class="text-white text-decoration-none hover-info">
-                                        <%= note.title %>
-                                    </a>
-                                </h3>
-                                <p 
-                                    class="text-secondary small flex-grow-1 mb-4" style="line-height: 1.6; color: #94a3b8 !important;">
-                                    <%= note.plainTextSummary.length > 100 ? note.plainTextSummary.substring(0, 100) + '...' : note.plainTextSummary %>
-                                </p>
-                                <!-- Taxonomy Tag Metrics -->
-                                <% if (note.tags && note.tags.length > 0) { %>
-                                    <div class="d-flex flex-wrap gap-1.5 mb-4">
-                                        <% note.tags.forEach(tag => { %>
-                                            <span class="font-monospace me-2 small px-2 py-0.5 rounded text-secondary border border-secondary border-opacity-20" style="font-size: 0.75rem; background-color: rgba(148, 163, 184, 0.05);">
-                                                #<%= tag %>
-                                            </span>
-                                        <% }) %>
-                                    </div>
-                                <% } %>
-
-                                <!-- System Infrastructure Footer Row (Simplified) -->
-                                <div class="d-flex justify-content-between align-items-center pt-3 mt-auto border-top border-secondary border-opacity-20 font-monospace text-muted" style="font-size: 0.75rem; color: #64748b !important;">
-                                    <span>CREATED: <%= new Date(note.createdAt).toLocaleDateString() %></span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <!-- Zero State System Fallback -->
-                <div class="col-12 text-center py-5">
-                    <div class="p-5 border border-dashed border-secondary border-opacity-30 rounded" style="background-color: #1e293b;">
-                        <p class="text-secondary font-monospace mb-0">System memory pool empty. No operational notes allocated.</p>
-                    </div>
-                </div>
-            <% } %>
-        </div>
-
+      <% } %>
     </div>
+
+    <% if (notes && notes.length > 0) { %>
+      <!-- Search and Filter Control Center (Seamless Dark Matrix Theme Integration) -->
+      <div class="mb-4">
+        <form action="/notes" method="GET" class="row g-2 align-items-center p-2 rounded border border-secondary border-opacity-20 mx-0 shadow-sm" style="background-color: #1e293b;">
+          <!-- Text Query Search Input -->
+          <div class="col-12 col-md-6">
+            <div class="input-group">
+              <span class="input-group-text border-end-0 text-secondary" style="background-color: #0f172a; border-color: #334155;">🔍</span>
+              <input type="text" name="search" class="form-control border-start-0 font-monospace text-white" placeholder="SEARCH_INDEX_PARAMS..." value="<%= currentFilters.search || '' %>" style="background-color: #0f172a; border-color: #334155;">
+            </div>
+          </div>
+
+          <!-- Chronological Sort Filter -->
+          <div class="col-12 col-sm-6 col-md-4">
+            <select name="sort" class="form-select font-monospace text-white-50" style="background-color: #0f172a; border-color: #334155;">
+              <option value="newest" <%= currentFilters.sort === 'newest' ? 'selected' : '' %>>SORT: NEWEST_FIRST</option>
+              <option value="oldest" <%= currentFilters.sort === 'oldest' ? 'selected' : '' %>>SORT: OLDEST_FIRST</option>
+              <option value="alphabetical" <%= currentFilters.sort === 'alphabetical' ? 'selected' : '' %>>SORT: ALPHABETICAL</option>
+            </select>
+          </div>
+
+          <!-- Action Button Triggers -->
+          <div class="col-12 col-sm-6 col-md-2 d-grid">
+            <button type="submit" class="btn btn-info font-monospace btn-sm py-2 fw-bold text-dark">EXECUTE</button>
+          </div>
+        </form>
+
+        <!-- Active Search Filter Reset Indicator -->
+        <% if (currentFilters.search) { %>
+          <div class="mt-2 small font-monospace d-flex align-items-center ps-1 text-secondary">
+            <span>Active target query: "<span class="text-info"><%= currentFilters.search %></span>"</span>
+            <a href="/notes" class="btn btn-link btn-sm text-danger p-0 ms-2 text-decoration-none">[RESET_INDEX]</a>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Active Grid Matrix Frame (⚠️ MIN-HEIGHT FIXED HERE to prevent pagination from jumping up) -->
+      <div class="row g-4 mb-4" style="min-height: 520px;">
+        <% notes.forEach(note => { %>
+          <div class="col-md-6 col-lg-4">
+            <!-- Dark Slate Note Card Block -->
+            <div class="card note-card border-0 h-100" style="background-color: #1e293b;">
+              <div class="card-body d-flex flex-column p-4">
+                
+                <!-- Card Meta Header Block -->
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                  <span class="badge font-monospace text-info px-3 py-1.5 small border border-info border-opacity-25" style="background-color: rgba(56, 189, 248, 0.05);">
+                    <%= note.folderName || 'Root_Directory' %>
+                  </span>
+                  <% if (note.isPinned) { %>
+                    <span class="text-warning font-monospace small" title="Pinned Node" style="font-size: 0.8rem;">
+                      ⚡ PIN_LOCKED
+                    </span>
+                  <% } %>
+                </div>
+
+                <!-- Content Display Elements -->
+                <h3 class="h5 fw-bold text-white tracking-tight mb-2">
+                  <a href="/notes/<%= note._id %>" class="text-white text-decoration-none hover-info">
+                    <%= note.title %>
+                  </a>
+                </h3>
+                <p class="text-secondary small flex-grow-1 mb-4" style="line-height: 1.6; color: #94a3b8 !important;">
+                  <%= note.plainTextSummary.length > 100 ? note.plainTextSummary.substring(0, 100) + '...' : note.plainTextSummary %>
+                </p>
+
+                <!-- Taxonomy Tag Metrics -->
+                <% if (note.tags && note.tags.length > 0) { %>
+                  <div class="d-flex flex-wrap gap-2 mb-4">
+                    <% note.tags.forEach(tag => { %>
+                      <span class="font-monospace small px-2 py-0.5 rounded text-secondary border border-secondary border-opacity-20" style="font-size: 0.75rem; background-color: rgba(148, 163, 184, 0.05);">
+                        #<%= tag %>
+                      </span>
+                    <% }) %>
+                  </div>
+                <% } %>
+
+                <!-- System Infrastructure Footer Row -->
+                <div class="d-flex justify-content-between align-items-center pt-3 mt-auto border-top border-secondary border-opacity-20 font-monospace text-muted" style="font-size: 0.75rem; color: #64748b !important;">
+                  <span>CREATED: <%= new Date(note.createdAt).toLocaleDateString() %></span>
+                  <span> OPERATOR: <span class="text-info"><%= (note.author && note.author.username) ? note.author.username : 'Unknown_User' %></span> </span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+    <% } else { %>
+      <!-- Zero State System Fallback Router (Matching height constraint for consistency) -->
+      <div class="row mb-4" style="min-height: 520px;">
+        <div class="col-12 text-center py-5">
+          <div class="p-5 border border-dashed border-secondary border-opacity-30 rounded" style="background-color: #1e293b;">
+            <% if (currentFilters.search) { %>
+              <h3 class="h5 font-monospace text-warning mb-2">// QUERY_EMPTY_SET_EXCEPTION</h3>
+              <p class="text-secondary font-monospace mb-3">No active note records found matching parameters: "<span class="text-info"><%= currentFilters.search %></span>"</p>
+              <a href="/notes" class="btn btn-sm btn-outline-info font-monospace px-3">[RESET_CLUSTER_INDEX]</a>
+            <% } else { %>
+              <h3 class="h5 font-monospace text-secondary mb-2">// REPOSITORY_EMPTY</h3>
+              <p class="text-secondary font-monospace mb-0">System memory pool empty. No operational notes allocated to this profile workspace.</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+
+    <!-- 📑 MULTI-PAGE INFRASTRUCTURE NAVIGATION CENTER (Perfect alignment on all pages) -->
+    <% if (pagination.totalPages > 1) { %>
+      <nav aria-label="Database Ledger Index Navigation" class="d-flex justify-content-center pt-2">
+        <ul class="pagination font-monospace gap-2 mb-0">
+          
+          <!-- Previous Page Control Pipeline -->
+          <li class="page-item <%= !pagination.hasPrevPage ? 'disabled' : '' %>">
+            <a class="page-link border-0 text-white rounded shadow-sm" href="/notes?page=<%= pagination.currentPage - 1 %><%= currentFilters.search ? '&search=' + currentFilters.search : '' %><%= currentFilters.sort ? '&sort=' + currentFilters.sort : '' %>" style="background-color: #1e293b;">
+              &lt; PREV_BLOCK
+            </a>
+          </li>
+
+          <!-- Iterative Numeric Matrix Map Loop -->
+          <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+            <li class="page-item <%= pagination.currentPage === i ? 'active' : '' %>">
+              <a class="page-link border-0 rounded text-center shadow-sm" href="/notes?page=<%= i %><%= currentFilters.search ? '&search=' + currentFilters.search : '' %><%= currentFilters.sort ? '&sort=' + currentFilters.sort : '' %>" style="<%= pagination.currentPage === i ? 'background-color: #38bdf8 !important; color: #0f172a !important; font-weight: bold;' : 'background-color: #1e293b; color: #94a3b8;' %> min-width: 40px;">
+                <%= i %>
+              </a>
+            </li>
+          <% } %>
+
+          <!-- Next Page Control Pipeline -->
+          <li class="page-item <%= !pagination.hasNextPage ? 'disabled' : '' %>">
+            <a class="page-link border-0 text-white rounded shadow-sm" href="/notes?page=<%= pagination.currentPage + 1 %><%= currentFilters.search ? '&search=' + currentFilters.search : '' %><%= currentFilters.sort ? '&sort=' + currentFilters.sort : '' %>" style="background-color: #1e293b;">
+              NEXT_BLOCK &gt;
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    <% } %>
+
+  </div>
 </div>

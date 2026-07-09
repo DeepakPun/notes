@@ -47,7 +47,6 @@ app.use(
 app.use(flash())
 
 app.use((req, res, next) => {
-  // Pack the separate session strings into a clean local template object
   if (req.session.userId) {
     res.locals.currentUser = {
       id: req.session.userId,

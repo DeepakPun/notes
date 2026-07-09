@@ -6,55 +6,55 @@ const NoteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      index: true,
     },
     title: {
       type: String,
       required: true,
-      trim: true,
       default: "Untitled Note Node",
     },
-
     content: {
       type: String,
       required: true,
     },
-
-    plainTextSummary: {
+    folderName: {
       type: String,
-      required: true,
+      default: "Root_Directory",
     },
-
     tags: [
       {
         type: String,
-        trim: true,
       },
     ],
 
-    folderName: {
+    coreFeatures: [
+      {
+        type: String,
+      },
+    ],
+    codeSnippet: {
       type: String,
-      trim: true,
-      default: "Root_Directory",
+    },
+    useCase: {
+      type: String,
+    },
+    officialDocs: {
+      type: String,
     },
 
-    isPinned: {
-      type: Boolean,
-      default: false,
+    // System Telemetry Metrics
+    plainTextSummary: {
+      type: String,
     },
-
     wordCount: {
       type: Number,
       default: 0,
     },
+    isPinned: {
+      type: Boolean,
+      default: false,
+    },
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 )
 
-NoteSchema.index({ title: "text", plainTextSummary: "text" })
-NoteSchema.index({ updatedAt: -1 })
-
-const Note = mongoose.model("Note", NoteSchema)
-export default Note
+export default mongoose.models.Note || mongoose.model("Note", NoteSchema)

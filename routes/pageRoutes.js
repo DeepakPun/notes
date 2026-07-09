@@ -13,10 +13,8 @@ router.get("/", (req, res) => {
   res.render("pages/landing")
 })
 
-router.get("/register", renderRegisterForm)
-router.post("/register", registerUser)
-router.get("/login", renderLoginForm)
-router.post("/login", loginUser)
+router.route("/register").get(renderRegisterForm).post(registerUser)
+router.route("/login").get(renderLoginForm).post(loginUser)
 router.get("/logout", logoutUser)
 
 export default router

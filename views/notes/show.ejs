@@ -1,90 +1,134 @@
 <%- layout('boilerplate') %>
 
-<!-- Full-Screen Matrix Content Container -->
-<div class="d-flex flex-column flex-grow-1 w-100 py-5" style="background-color: #0f172a;">
-    <div class="container text-white" style="max-width: 800px;">
-        
-        <!-- Navigation Breadcrumb Header -->
-        <div class="d-flex justify-content-between align-items-center mb-4 font-monospace small">
-            <div>
-                <a href="/notes" class="text-info text-decoration-none">&larr; RETURN_TO_LEDGER</a>
-                <!-- <span class="ms-2">// NODE_INSPECTION_BUFFER</span> -->
-            </div>
-            
-            <!-- Structural Action Form Triggers --> 
-<% if (currentUser && note.author && currentUser.id === note.author.toString()) { %>
-    <div class="d-flex gap-2">
-        <!-- Edit Form Action Trigger Link -->
-        <a href="/notes/<%= note._id %>/edit" class="btn btn-outline-info btn-sm font-monospace d-inline-flex align-items-center py-1 px-3 text-decoration-none" style="font-size: 0.85rem; letter-spacing: 0.5px;">
-  EDIT_NODE
-</a>
-
-        
-        <!-- Delete Note modal link -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">
-            Delete
-        </button>
+<div class="d-flex flex-column flex-grow-1 w-100 py-3" style="background-color: #0f172a;">
+  <div class="container text-white" style="max-width: 900px;">
+    
+    <!-- Top System Back Navigation Anchor Link -->
+    <div class="mb-4">
+      <a href="/notes" class="text-info text-decoration-none font-monospace small">&lt;= RETURN_TO_WORKSPACE_INDEX</a>
     </div>
-<% } %>
 
+    <!-- Unified Matrix Node Ledger Card -->
+    <div class="card border-0 p-4 shadow-lg mb-4" style="background-color: #1e293b;">
+      <div class="card-body">
+        
+        <!-- Directory Meta Badge Row Layout Element -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="badge font-monospace text-info px-3 py-1.5 small border border-info border-opacity-25" style="background-color: rgba(56, 189, 248, 0.05);">
+            📁 <%= note.folderName %>
+          </span>
+          <div class="font-monospace text-muted small" style="font-size: 0.75rem;">
+            <span>OPERATOR: <span class="text-info"><%= (note.author && note.author.username) ? note.author.username : 'Unknown_User' %></span></span>
+          </div>
         </div>
 
-        <!-- Master Document Header Section -->
-        <div class="pb-3 mb-4 border-bottom border-secondary border-opacity-20">
-            <div class="d-flex align-items-center gap-3 mb-2">
-                <span class="badge font-monospace text-info px-2 py-1 small border border-info border-opacity-25" style="background-color: rgba(56, 189, 248, 0.05); font-size: 0.75rem;">
-                    <%= note.folderName %>
-                </span>
-                <% if (note.isPinned) { %>
-                    <span class="text-warning font-monospace" style="font-size: 0.75rem;">⚡ PIN_LOCKED</span>
-                <% } %>
-            </div>
+        <!-- Heading Structural Title Context -->
+        <h1 class="h2 fw-black text-white tracking-tight mb-3"><%= note.title %></h1>
+        
+        <!-- Core Overview Definition Segment -->
+        <div class="mb-4">
+          <h3 class="h6 font-monospace text-uppercase text-secondary mb-2">// SYSTEM_OVERVIEW</h3>
+          <p class="fs-5 text-secondary-50 mb-0" style="line-height: 1.7; color: #cbd5e1;"><%= note.content %></p>
+        </div>
+
+        <!-- Informative Extensions Split Row (Only manifests if sub-metrics exist) -->
+        <% if ((note.coreFeatures && note.coreFeatures.length > 0) || note.useCase) { %>
+          <hr class="border-secondary opacity-20 my-4">
+          <div class="row g-4 mb-2">
             
-            <h1 class="display-5 fw-black text-white tracking-tight mb-2">
-                <%= note.title %>
-            </h1>
-            
-            <div class="font-monospace text-muted" style="font-size: 0.75rem; color: #64748b !important;">
-                ALLOCATED_TIMESTAMP: <%= new Date(note.createdAt).toLocaleString() %>
-            </div>
-        </div>
+            <!-- Column Side A: Highlights List Array Iteration -->
+            <% if (note.coreFeatures && note.coreFeatures.length > 0) { %>
+              <div class="col-12 col-md-6">
+                <h3 class="h6 font-monospace text-uppercase text-secondary mb-2">// CORE_HIGHLIGHTS</h3>
+                <ul class="ps-3 font-monospace small text-white-50" style="line-height: 1.6;">
+                  <% note.coreFeatures.forEach(feature => { %>
+                    <li class="mb-1"><%= feature %></li>
+                  <% }) %>
+                </ul>
+              </div>
+            <% } %>
 
-        <!-- Raw Core Text Content Body -->
-        <div class="fs-6 mb-5 text-secondary-emphasis" style="line-height: 1.8; color: #cbd5e1 !important; white-space: pre-wrap;">
-            <%= note.content %>
-        </div>
+            <!-- Column Side B: Practical Modular Architectural Use Case -->
+            <% if (note.useCase) { %>
+              <div class="col-12 col-md-6">
+                <h3 class="h6 font-monospace text-uppercase text-secondary mb-2">// ARCHITECTURAL_USE_CASE</h3>
+                <p class="font-monospace small text-info border border-info border-opacity-10 p-2 rounded mb-0" style="background-color: rgba(56, 189, 248, 0.02); line-height: 1.5;">
+                  <%= note.useCase %>
+                </p>
+              </div>
+            <% } %>
 
-        <!-- Taxonomy Bottom Footer Section -->
+          </div>
+        <% } %>
+
+        <!-- Reference Syntax Sandbox Code Block View Terminal -->
+        <% if (note.codeSnippet) { %>
+          <hr class="border-secondary opacity-20 my-4">
+          <div class="mb-2">
+            <h3 class="h6 font-monospace text-uppercase text-secondary mb-2">// QUICK_REFERENCE_SYNTAX</h3>
+            <pre class="bg-dark p-3 rounded font-monospace border border-secondary border-opacity-30 mb-0 shadow-inner" style="font-size: 0.85rem;"><code style="color: #4ade80 !important;"><%= note.codeSnippet %></code></pre>
+          </div>
+        <% } %>
+
+        <!-- Taxonomy Infrastructure Tag Array Mapping -->
         <% if (note.tags && note.tags.length > 0) { %>
-                                    <div class="d-flex flex-wrap gap-1.5 mb-4">
-                                        <% note.tags.forEach(tag => { %>
-                                            <span class="font-monospace me-2 small px-2 py-0.5 rounded text-secondary border border-secondary border-opacity-20" style="font-size: 0.75rem; background-color: rgba(148, 163, 184, 0.05);">
-                                                #<%= tag %>
-                                            </span>
-                                        <% }) %>
-                                    </div>
-                                <% } %>
+          <hr class="border-secondary opacity-20 my-4">
+          <div class="mb-2">
+            <h3 class="h6 font-monospace text-uppercase text-secondary mb-2">// TAG_METRICS</h3>
+            <div class="d-flex flex-wrap gap-1">
+              <% note.tags.forEach(tag => { %>
+                <span class="font-monospace small px-2 py-0.5 rounded text-secondary border border-secondary border-opacity-20" style="font-size: 0.72rem; background-color: rgba(148, 163, 184, 0.05);">
+                  #<%= tag %>
+                </span>
+              <% }) %>
+            </div>
+          </div>
+        <% } %>
 
-    </div>
+        <!-- Card Infrastructure System Analytics & Actions Footer Panel -->
+        <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-20 mt-4">
+          
+          <!-- Telemetry Readout Fields -->
+          <div class="d-flex gap-3 font-monospace small" style="font-size: 0.75rem;">
+            <span class="text-white">INDEXED:<%= new Date(note.createdAt).toLocaleDateString() %></span>
+            <span class="text-white">WORD_COUNT: <%= note.wordCount %></span>
+          </div>
+
+          <!-- Interactive Action Bridges Control Center -->
+          <div class="d-flex gap-2">
+            <% if (note.officialDocs) { %>
+              <a href="<%= note.officialDocs %>" target="_blank" class="btn btn-sm btn-outline-info font-monospace text-decoration-none px-3" style="font-size: 0.75rem;">[OFFICIAL_DOCS] ↗</a>
+            <% } %>
+
+            <% if (currentUser && note.author && currentUser.id === note.author._id.toString()) { %>
+              <a href="/notes/<%= note._id %>/edit" class="btn btn-sm btn-outline-warning font-monospace px-3" style="font-size: 0.75rem;">EDIT_NODE</a>
+              <button type="button" class="btn btn-sm btn-outline-danger font-monospace px-3" style="font-size: 0.75rem;" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">DELETE_NODE</button>
+            <% } %>
+          </div>
+
+        </div>
+
+      </div>
+    </div> <!-- End Unified Card Block -->
+
+  </div>
 </div>
 
-<!-- Bootstrap Delete Confirmation Modal -->
+<!-- Bootstrap Delete Confirmation Dark Themed Modal -->
 <div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteNoteModalLabel">Delete Note?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content bg-dark border-secondary text-white">
+      <div class="modal-header border-bottom border-secondary border-opacity-20">
+        <h5 class="modal-title font-monospace text-warning" id="deleteNoteModalLabel">// PURGE_WARNING</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        Are you sure you want to permanently delete this note?
+      <div class="modal-body font-monospace text-secondary-50 small">
+        Are you sure you want to permanently delete this note node from the cluster index indices?
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        
-        <!-- HTML Form that submits directly to your Express route -->
+      <div class="modal-footer border-top border-secondary border-opacity-20">
+        <button type="button" class="btn btn-sm btn-secondary font-monospace" data-bs-dismiss="modal">CANCEL</button>
         <form action="/notes/<%= note._id %>/delete" method="POST" style="display: inline;">
-          <button type="submit" class="btn btn-danger">Delete Permanently</button>
+          <button type="submit" class="btn btn-sm btn-danger font-monospace">CONFIRM_PURGE</button>
         </form>
       </div>
     </div>

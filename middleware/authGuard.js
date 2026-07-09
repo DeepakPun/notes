@@ -3,15 +3,14 @@
  * Flashes a terminal status error and diverts unauthenticated sessions to login.
  */
 export const isLoggedIn = (req, res, next) => {
-  // Check if the user object exists in our lightweight native session store
-  if (!req.session || !req.session.userId) {
-    req.flash(
-      "error",
-      "[UNAUTHORIZED] Active terminal session signature required. Access denied.",
-    )
-    return res.redirect("/login")
-  }
+  if (req.session.userId) return next()
 
-  // Authorization verified. Proceed directly to the next operation in the execution stack.
-  next()
+  req.session.returnTo = req.originalUrl
+
+  req.flash(
+    "error",
+    `[ACCESS DENIED] You must be logged in to access this page.`,
+  )
+
+  req.session.save(() => res.redirect("/login"))
 }

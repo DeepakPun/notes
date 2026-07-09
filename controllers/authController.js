@@ -157,7 +157,12 @@ export const loginUser = async (req, res) => {
       "success",
       `Session handshake authorized. Operator node ${user.username} online.`,
     )
-    res.redirect("/notes")
+
+    const redirectUrl = req.session.returnTo || "/notes"
+
+    delete req.session.returnTo
+
+    req.session.save(() => res.redirect(redirectUrl))
   } catch (error) {
     console.error("// [FAILURE] Session authorization crash:", error)
     req.flash(

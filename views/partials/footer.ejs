@@ -1,41 +1,43 @@
 <footer
-  class="footer mt-auto py-4 border-top border-secondary border-opacity-20"
+  class="footer mt-auto py-3 border-top border-secondary border-opacity-20"
+  style="background-color: #0f172a"
 >
-  <div class="container text-center font-monospace small text-slate-400">
-    <!-- System Metadata Analytics Row -->
-    <p class="mb-2 text-uppercase tracking-wider opacity-60">
-      &copy; <%= new Date().getFullYear() %> Notes Matrix Engine // Built by
-      Operator: Deepak
-    </p>
-
-    <!-- Interactive Navigation Context Bridges -->
+  <div class="container font-monospace small text-slate-400">
     <div
-      class="d-flex justify-content-center gap-3 mb-2 font-monospace"
-      style="font-size: 0.8rem"
+      class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-center text-md-start"
     >
-      <a href="/notes" class="text-secondary text-decoration-none hover-info"
-        >// WORKSPACE</a
+      <p
+        class="mb-0 text-uppercase tracking-wider opacity-60"
+        style="font-size: 0.75rem"
       >
-      <span class="text-secondary-opacity opacity-25">|</span>
-      <!-- Swap this URL path out for your actual repository location down the road -->
-      <a
-        href="https://github.com/DeepakPun/notes"
-        target="_blank"
-        class="text-secondary text-decoration-none hover-info"
-        >// SOURCE_CODE</a
-      >
-    </div>
+        &copy; <%= new Date().getFullYear() %> Notes Matrix Engine // Operator:
+        Deepak
+      </p>
 
-    <!-- Live Hardened Cluster Status Indicator -->
-    <span
-      class="text-info opacity-70 d-inline-flex align-items-center gap-1.5"
-      style="font-size: 0.75rem"
-    >
+      <!-- Live Hardened Cluster Status Indicator -->
       <span
-        class="d-inline-block rounded-circle bg-success me-2"
-        style="width: 10px; height: 10px"
-      ></span>
-      CORE ENGINE INSTANCE SECURED // TENANT_ISOLATION_ACTIVE
-    </span>
+        class="text-info opacity-70 d-inline-flex align-items-center justify-content-center justify-content-md-start gap-2"
+        style="font-size: 0.75rem"
+      >
+        <span
+          class="d-inline-block rounded-circle bg-success"
+          style="width: 8px; height: 8px"
+        ></span>
+        CORE ENGINE SECURED // TENANT_ACTIVE
+      </span>
+
+      <div class="d-flex gap-3 font-monospace mb-0" style="font-size: 0.75rem">
+        <a href="/notes" class="text-secondary text-decoration-none hover-info"
+          >// WORKSPACE</a
+        >
+        <span class="text-secondary opacity-25">|</span>
+        <a
+          href="https://github.com/DeepakPun/notes"
+          target="_blank"
+          class="text-secondary text-decoration-none hover-info"
+          >// SOURCE_CODE</a
+        >
+      </div>
+    </div>
   </div>
 </footer>

@@ -12,11 +12,7 @@ import { isLoggedIn } from "../middleware/authGuard.js"
 
 const router = express.Router()
 
-// Base Paths // Target: /notes
-router
-  .route("/")
-  .get(getAllNotes) // READ: Fetch and render all system notes
-  .post(isLoggedIn, createNote) // CREATE: Commit a new note node data block
+router.route("/").get(getAllNotes).post(isLoggedIn, createNote)
 
 // Render new note Form
 router.get("/new", isLoggedIn, (req, res) => {

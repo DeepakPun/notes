@@ -1,94 +1,146 @@
 <%- layout('boilerplate') %>
 
-<!-- Form Engine Matrix Canvas Wrapper -->
-<div class="d-flex flex-column flex-grow-1 w-100 py-5" style="background-color: #0f172a;">
-    <div class="container text-white" style="max-width: 720px;">
-        
-        <!-- Navigation Breadcrumb Header -->
-        <div class="mb-4 font-monospace small">
-            <a href="/notes/<%= note._id %>" class="text-info text-decoration-none">&larr; ABORT_MUTATION</a>
-            <span class="text-muted ms-2">// NODE_REWRITE_STREAM</span>
-        </div>
-
-        <!-- Section Title Header Block -->
-        <div class="pb-3 mb-4 border-bottom border-secondary border-opacity-20">
-            <h1 class="h2 fw-black text-white tracking-tight mb-1">Modify Data Node</h1>
-            <p class="text-warning font-monospace small mb-0">// Executing overwrite sequence on instance ID: <%= note._id %></p>
-        </div>
-
-        <!-- Data Entry Form Block -->
-        <form action="/notes/<%= note._id %>/update" method="POST" class="needs-validation" novalidate>
-            
-            <!-- 1. Document Title Field -->
-            <div class="mb-4">
-                <label for="title" class="form-label font-monospace text-secondary small fw-bold">1. OVERWRITE_TITLE_IDENTIFIER</label>
-                <input type="text" 
-                       class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace" 
-                       id="title" 
-                       name="title" 
-                       value="<%= note.title %>"
-                       required 
-                       style="background-color: #0b1329 !important;">
-                <div class="invalid-feedback font-monospace small text-danger mt-1">
-                    [CRITICAL] String element identity token is mandatory.
-                </div>
-            </div>
-
-            <!-- 2. Folder Allocation Taxonomy Selection -->
-            <div class="mb-4">
-                <label for="folderName" class="form-label font-monospace text-secondary small fw-bold">2. LOGICAL_DIRECTORY_TARGET</label>
-                <select class="form-select bg-dark border-secondary border-opacity-30 text-white font-monospace" 
-                        id="folderName" 
-                        name="folderName" 
-                        style="background-color: #0b1329 !important;">
-                    <option value="Root_Directory" <%= note.folderName === 'Root_Directory' ? 'selected' : '' %>>Root_Directory</option>
-                    <option value="Infrastructure" <%= note.folderName === 'Infrastructure' ? 'selected' : '' %>>Infrastructure</option>
-                    <option value="Database_Core" <%= note.folderName === 'Database_Core' ? 'selected' : '' %>>Database_Core</option>
-                    <option value="Security_Audit" <%= note.folderName === 'Security_Audit' ? 'selected' : '' %>>Security_Audit</option>
-                    <option value="Frontend_Templates" <%= note.folderName === 'Frontend_Templates' ? 'selected' : '' %>>Frontend_Templates</option>
-                </select>
-            </div>
-
-            <!-- 3. Tags Context Arrays String -->
-            <div class="mb-4">
-                <label for="tags" class="form-label font-monospace text-secondary small fw-bold">3. TAXONOMY_METRIC_TAGS (COMMA_SEPARATED)</label>
-                <input type="text" 
-                       class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace" 
-                       id="tags" 
-                       name="tags" 
-                       value="<%= note.tags ? note.tags.join(', ') : '' %>"
-                       placeholder="e.g., devops, cloud, scaling"
-                       style="background-color: #0b1329 !important;">
-                <div class="form-text text-info text-opacity-50 font-monospace" style="font-size: 0.75rem;">
-                    // Overwriting keywords updates unique tag index parameters immediately.
-                </div>
-            </div>
-
-            <!-- 4. Text Area Editor Layer Context Content -->
-            <div class="mb-5">
-                <label for="content" class="form-label font-monospace text-secondary small fw-bold">4. MEMORY_BUFFER_MUTATION (CONTENT)</label>
-                <textarea class="form-control bg-dark border-secondary border-opacity-30 text-white font-monospace" 
-                          id="content" 
-                          name="content" 
-                          rows="10" 
-                          required 
-                          style="background-color: #0b1329 !important; line-height: 1.6;"><%= note.content %></textarea>
-                <div class="invalid-feedback font-monospace small text-danger mt-1">
-                    [CRITICAL] Memory data context payload stream cannot be submitted empty.
-                </div>
-            </div>
-
-            <!-- 5. Form Executive Execution Processing Control Triggers -->
-            <div class="d-flex align-items-center justify-content-end gap-3 pt-3 border-top border-secondary border-opacity-10">
-                <a href="/notes/<%= note._id %>" class="btn btn-outline-secondary font-monospace px-4 py-2 small">
-                    CANCEL_MUTATION
-                </a>
-                <button type="submit" class="btn btn-info font-monospace px-4 py-2 small shadow-sm fw-bold text-dark">
-                    EXECUTE_OVERWRITE &rarr;
-                </button>
-            </div>
-
-        </form>
-
+<div
+  class="d-flex flex-column flex-grow-1 w-100 py-5"
+  style="background-color: #0f172a"
+>
+  <div class="container text-white" style="max-width: 800px">
+    <div class="mb-4 border-bottom border-secondary border-opacity-20 pb-3">
+      <h1 class="h3 font-monospace text-warning">
+        // MUTATE_EXISTING_NOTE_NODE
+      </h1>
     </div>
+
+    <form
+      action="/notes/<%= note._id %>/update"
+      method="POST"
+      class="p-4 rounded border border-secondary border-opacity-20"
+      style="background-color: #1e293b"
+    >
+      <!-- Grid Row for Folder and Title -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-8">
+          <label class="form-label font-monospace small text-secondary"
+            >NODE_TITLE</label
+          >
+          <input
+            type="text"
+            name="title"
+            class="form-control bg-dark border-secondary text-white font-monospace"
+            value="<%= note.title %>"
+            required
+          />
+        </div>
+        <div class="col-md-4">
+          <label class="form-label font-monospace small text-secondary"
+            >FOLDER_NAME</label
+          >
+          <input
+            type="text"
+            name="folderName"
+            class="form-control bg-dark border-secondary text-white font-monospace"
+            value="<%= note.folderName %>"
+          />
+        </div>
+      </div>
+
+      <!-- Core Context Definition -->
+      <div class="mb-3">
+        <label class="form-label font-monospace small text-secondary"
+          >CORE_DEFINITION_OVERVIEW</label
+        >
+        <textarea
+          name="content"
+          class="form-control bg-dark border-secondary text-white"
+          rows="3"
+          required
+        >
+<%= note.content %></textarea
+        >
+      </div>
+
+      <!-- Extension Fields -->
+      <div class="mb-3">
+        <label class="form-label font-monospace small text-secondary"
+          >CORE_FEATURES_HIGHLIGHTS (Separated by commas)</label
+        >
+        <input
+          type="text"
+          name="coreFeatures"
+          class="form-control bg-dark border-secondary text-white font-monospace"
+          value="<%= note.coreFeatures ? note.coreFeatures.join(', ') : '' %>"
+          placeholder="Component-Based, Virtual DOM, Unidirectional Flow"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label font-monospace small text-secondary"
+          >ARCHITECTURAL_USE_CASE</label
+        >
+        <input
+          type="text"
+          name="useCase"
+          class="form-control bg-dark border-secondary text-white font-monospace"
+          value="<%= note.useCase %>"
+          placeholder="When to use this module?"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label font-monospace small text-secondary"
+          >QUICK_REFERENCE_SYNTAX (Code block string)</label
+        >
+        <textarea
+          name="codeSnippet"
+          class="form-control bg-dark border-secondary text-success font-monospace"
+          rows="4"
+          placeholder="const App = () => {}"
+        >
+<%= note.codeSnippet %></textarea
+        >
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <label class="form-label font-monospace small text-secondary"
+            >TAXONOMY_TAGS (Separated by commas)</label
+          >
+          <input
+            type="text"
+            name="tags"
+            class="form-control bg-dark border-secondary text-white font-monospace"
+            value="<%= note.tags ? note.tags.join(', ') : '' %>"
+            placeholder="javascript, UI, web"
+          />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label font-monospace small text-secondary"
+            >OFFICIAL_DOCUMENTATION_URL</label
+          >
+          <input
+            type="url"
+            name="officialDocs"
+            class="form-control bg-dark border-secondary text-white font-monospace"
+            value="<%= note.officialDocs %>"
+            placeholder="https://example.com"
+          />
+        </div>
+      </div>
+
+      <!-- Execution Controllers -->
+      <div class="d-flex gap-2 justify-content-end">
+        <a
+          href="/notes/<%= note._id %>"
+          class="btn btn-outline-secondary font-monospace btn-sm px-3"
+          >ABORT_MUTATION</a
+        >
+        <button
+          type="submit"
+          class="btn btn-warning font-monospace btn-sm px-4 fw-bold text-dark"
+        >
+          COMMIT_OVERWRITE
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
